@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case View - {{ case_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .section {
+            background: #fff;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 6px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 8px 0 4px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 15px 0;
+        }
+        .row-box {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            background: #fdfdfd;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1a242f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Case View for <code>{{ case_id }}</code></h1>
+
+    {% if message %}
+        <p style="color:red;">{{ message }}</p>
+    {% endif %}
+
+    <form method="POST">
+
+        {% if userdocs %}
+        <div class="section">
+            <h2>UserDocs</h2>
+            {% for col in userdocs.__table__.columns %}
+                {% if col.name not in ['id', 'case_id'] %}
+                    <label>{{ col.name }}:</label>
+                    <input type="text" name="userdocs_{{ col.name }}" value="{{ userdocs | attr(col.name) }}">
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if doc1_list %}
+        <div class="section">
+            <h2>RecordDoc1</h2>
+            {% for row in doc1_list %}
+                <div class="row-box">
+                    <strong>Row ID: {{ row.id }}</strong><br>
+                    {% for col in row.__table__.columns %}
+                        {% if col.name not in ['id', 'case_id'] %}
+                            <label>{{ col.name }}:</label>
+                            <input type="text" name="doc1_{{ row.id }}_{{ col.name }}" value="{{ row | attr(col.name) }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if doc2_list %}
+        <div class="section">
+            <h2>RecordDoc2</h2>
+            {% for row in doc2_list %}
+                <div class="row-box">
+                    <strong>Row ID: {{ row.id }}</strong><br>
+                    {% for col in row.__table__.columns %}
+                        {% if col.name not in ['id', 'case_id'] %}
+                            <label>{{ col.name }}:</label>
+                            <input type="text" name="doc2_{{ row.id }}_{{ col.name }}" value="{{ row | attr(col.name) }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if desc_list %}
+        <div class="section">
+            <h2>Modules</h2>
+            {% for row in desc_list %}
+                <div class="row-box">
+                    <strong>Row ID: {{ row.id }}</strong><br>
+                    {% for col in row.__table__.columns %}
+                        {% if col.name not in ['id', 'case_id'] %}
+                            <label>{{ col.name }}:</label>
+                            <input type="text" name="doc2_{{ row.id }}_{{ col.name }}" value="{{ row | attr(col.name) }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if pricebid_list %}
+        <div class="section">
+            <h2>CAPITAL</h2>
+            {% for row in pricebid_list %}
+                <div class="row-box">
+                    <strong>Row ID: {{ row.id }}</strong><br>
+                    {% for col in row.__table__.columns %}
+                        {% if col.name not in ['id', 'case_id'] %}
+                            <label>{{ col.name }}:</label>
+                            <input type="text" name="pricebid_{{ row.id }}_{{ col.name }}" value="{{ row | attr(col.name) }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if pricesched_list %}
+        <div class="section">
+            <h2>AMC</h2>
+            {% for row in pricesched_list %}
+                <div class="row-box">
+                    <strong>Row ID: {{ row.id }}</strong><br>
+                    {% for col in row.__table__.columns %}
+                        {% if col.name not in ['id', 'case_id'] %}
+                            <label>{{ col.name }}:</label>
+                            <input type="text" name="pricesched_{{ row.id }}_{{ col.name }}" value="{{ row | attr(col.name) }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <button type="submit">Save All Changes</button>
+        
+    </form>
+            <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
+
+</body>
+</html>

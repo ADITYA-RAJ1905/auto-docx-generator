@@ -1,0 +1,175 @@
+<h2 class="step-header">Step 2: Upload Type Decider Excel</h2>
+<p>Download the Excel template: <a href="{{ url_for('download_template') }}" target="_blank">Download Template</a></p>
+
+<form method="POST" enctype="multipart/form-data" class="type-decider-form">
+    <div class="form-group">
+        <label class="form-label">Upload Excel (with 'type' column):</label>
+        <div class="file-upload-wrapper">
+            <input type="file" name="type_file" required class="file-upload-input">
+            <span class="file-upload-custom"></span>
+        </div>
+    </div>
+    <button type="submit" class="submit-btn">Continue</button>
+</form>
+
+<style>
+/* Form Container */
+.type-decider-form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Step Header */
+.step-header {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.step-header:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    border-radius: 2px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #34495e;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Custom File Input */
+.file-upload-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-upload-input {
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    height: 100%;
+}
+
+.file-upload-custom {
+    display: block;
+    padding: 15px;
+    border: 2px dashed #bdc3c7;
+    border-radius: 8px;
+    background: #f8f9fa;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.file-upload-custom:before {
+    content: "Click to browse files";
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.file-upload-custom:after {
+    content: "or drag and drop";
+    display: block;
+    font-size: 0.9rem;
+    color: #95a5a6;
+    margin-top: 5px;
+}
+
+.file-upload-input:focus + .file-upload-custom,
+.file-upload-input:hover + .file-upload-custom {
+    border-color: #3498db;
+    background: #eaf2f8;
+    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.2);
+}
+
+.file-upload-input:valid + .file-upload-custom {
+    border-style: solid;
+    border-color: #27ae60;
+    background: #e8f8f0;
+}
+
+.file-upload-input:valid + .file-upload-custom:before {
+    content: "File selected:";
+    color: #27ae60;
+}
+
+.file-upload-input:valid + .file-upload-custom:after {
+    content: attr(data-text);
+    color: #27ae60;
+    font-weight: 500;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(41, 128, 185, 0.2);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(41, 128, 185, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(41, 128, 185, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .type-decider-form {
+        padding: 20px;
+        margin: 20px 15px;
+    }
+    
+    .step-header {
+        font-size: 1.5rem;
+    }
+    
+    .file-upload-custom:after {
+        display: none;
+    }
+}
+</style>

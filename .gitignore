@@ -1,0 +1,20 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+uploads/
+output/
+output_files/
+OUTPUT_FOLDER/
+test_data/
+.env
+# Ignore personal documents
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.xlsx
+*.xls
+
+# Ignore database files
+*.db

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel to Word Generator</title>
+    <style>
+        body { font-family: Arial; padding: 40px; background: #f2f2f2; }
+        .box { background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; }
+        h2 { text-align: center; }
+        .download-link { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Upload Excel and Generate Word Docs</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="excel_file" required><br><br>
+        <button type="submit">Upload and Generate</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+        {% for file in files %}
+            <div class="download-link">
+                <a href="{{ url_for('download', filename=file.split('/')[-1]) }}">Download {{ file.split('/')[-1] }}</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>

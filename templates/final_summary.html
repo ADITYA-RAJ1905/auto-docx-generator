@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Summary</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #95a5a6;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            font-weight: 500;
+        }
+        
+        .summary-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .documents-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .documents-list li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .documents-list li:hover {
+            background-color: var(--medium-gray);
+            transform: translateX(5px);
+        }
+        
+        .documents-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .documents-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        .documents-list a::before {
+            content: "📄";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .no-documents {
+            color: var(--dark-gray);
+            font-style: italic;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .action-buttons a {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .view-case-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .view-case-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+        }
+        
+        .back-link {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .back-link:hover {
+            background-color: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(44, 62, 80, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .summary-container {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .action-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-container">
+        <h1>Final Summary for Case ID: {{ case_id }}</h1>
+        
+        {% if files %}
+            <h3>Generated Documents:</h3>
+            <ul class="documents-list">
+            {% for file in files %}
+                <li><a href="{{ url_for('download', filename=file) }}" target="_blank">{{ file }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-documents">No documents generated.</p>
+        {% endif %}
+
+        <div class="action-buttons">
+            <a href="{{ url_for('view_case', case_id=case_id) }}" class="view-case-btn">View or Edit This Case</a>
+            <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
